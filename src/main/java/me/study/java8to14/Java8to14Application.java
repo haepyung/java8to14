@@ -1,5 +1,8 @@
 package me.study.java8to14;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Spliterator;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -37,6 +40,29 @@ public class Java8to14Application {
 
     BinaryOperator<Integer> sum = Integer::sum;
     BinaryOperator<Integer> sum2 = (a, b) -> a + b;
+
+    List<String> names = new ArrayList<>();
+    names.add("haepyung");
+    names.add("whitheship");
+    names.add("foo");
+
+    //for 문 방법1
+    names.forEach(System.out::println);
+    //for 문 방법2
+    for (String n : names)
+      System.out.println(n);
+
+    Spliterator<String> spliterator = names.spliterator();
+    Spliterator<String> spliterator1 = spliterator.trySplit();
+    while (spliterator.tryAdvance(System.out::println));
+    System.out.println("==============================");
+    while (spliterator1.tryAdvance(System.out::println));
+
+    long h = names.stream().map(String::toUpperCase)
+            .filter(s -> s.startsWith("H"))
+            .count();
+
+    System.out.println(h);
   }
 
 
