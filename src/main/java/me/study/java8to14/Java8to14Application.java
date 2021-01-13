@@ -58,9 +58,7 @@ public class Java8to14Application {
     System.out.println("==============================");
     while (spliterator1.tryAdvance(System.out::println));
 
-    long h = names.stream().map(String::toUpperCase)
-            .filter(s -> s.startsWith("H"))
-            .count();
+    long h = names.stream().map(String::toUpperCase).filter(s -> s.startsWith("H")).count();
 
     System.out.println(h);
   }
