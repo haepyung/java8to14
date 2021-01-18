@@ -22,9 +22,6 @@ public class Java8to14Application {
 
   public static void main(String[] args) throws InterruptedException, ExecutionException {
 
-    //SpringApplication.run(Java8to14Application.class, args);
-
-    /*
     Function<Integer, Integer> plus11 = (i) -> i + 11;
     RunSomething runSomething11 = (num) -> { return num + 11; };
     System.out.println(plus11.apply(1));
@@ -65,7 +62,7 @@ public class Java8to14Application {
     long h = names.stream().map(String::toUpperCase).filter(s -> s.startsWith("H")).count();
     System.out.println(h);
     System.out.println("==============================");
-    /*
+
     Thread thread = new Thread(() -> {
       while (true) {
         System.out.println("Thread:: " + Thread.currentThread().getName());
@@ -108,7 +105,7 @@ public class Java8to14Application {
     submit.get();
     System.out.println("END!!");
 
-    ExecutorService callExecutor = Executors.newFixedThreadPool(2);
+    ExecutorService callExecutor2 = Executors.newFixedThreadPool(2);
     Callable<String> haepyung = () -> {
       Thread.sleep(2000L);
       return "Haepyung";
@@ -128,19 +125,16 @@ public class Java8to14Application {
     System.out.println(s);
 
     callExecutor.shutdown();
-    */
 
     System.out.println("START~!!");
 
-    CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
+    CompletableFuture<String> hello2 = CompletableFuture.supplyAsync(() -> {
       System.out.println("Hello " + Thread.currentThread().getName());
       return "hello";
     });
 
-    CompletableFuture<String> future = hello.thenCompose(s -> getWorld(s));
+    CompletableFuture<String> future = hello2.thenCompose(ss -> getWorld(s));
     System.out.println(future.get());
-
-
   }
 
   private static CompletableFuture<String> getWorld(String msg) {
