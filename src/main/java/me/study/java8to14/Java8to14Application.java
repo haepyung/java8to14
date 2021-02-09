@@ -1,20 +1,8 @@
 package me.study.java8to14;
 
-import java.awt.print.Pageable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.IntConsumer;
-import java.util.function.Supplier;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import java.util.function.*;
 
 
 //@SpringBootApplication
@@ -175,5 +163,50 @@ public class Java8to14Application {
       System.out.println(i + baseNumber);
     };
   }
+
+  public class AppleComparator implements Comparator<Apple> {
+    public int compare(Apple a1, Apple a2){
+      return a1.getWeight().compareTo(a2.getWeight());
+    }
+  }
+
+  public void LamddaTest() {
+
+    List<Apple> inventory = new ArrayList<>();
+    inventory.add(Apple.builder().weight("150").color("blue").build());
+    inventory.add(Apple.builder().weight("100").color("red").build());
+    inventory.add(Apple.builder().weight("180").color("green").build());
+
+    //STEP01. 코드 전달
+    inventory.sort(new AppleComparator());
+
+    //STEP02. 익명 클래
+    inventory.sort(new Comparator<Apple>() {
+      public int compare(Apple o1, Apple o2) {
+        return  o1.getWeight().compareTo(o2.getWeight());
+      }
+    });
+
+    //STEP03. 람다표현식
+    // 1) 전체
+    inventory.sort((Apple a1, Apple a2) -> a1.getWeight().compareTo(a2.getWeight()));
+    // 2) 간소-1
+    inventory.sort((a1, a2) -> a1.getWeight().compareTo(a2.getWeight()));
+    // 3) 간소-2
+    inventory.sort(Comparator.comparing((Apple a) -> a.getWeight()));
+    // 4) 간소-3
+    inventory.sort(Comparator.comparing(Apple::getWeight));
+
+    // 정렬 심화
+    // 1) 역정렬
+    inventory.sort(Comparator.comparing(Apple::getWeight).reversed());
+
+    // 2) 역정렬 + 정렬 한개 추가
+    inventory.sort(Comparator.comparing(Apple::getWeight)
+            .reversed() //역정렬
+            .thenComparing(Apple::getCountry)); // 정렬 조건 추
+
+  }
+
 
 }
