@@ -10,6 +10,8 @@ public class Java8to14Application {
 
   public static void main(String[] args) throws InterruptedException, ExecutionException {
 
+    collectionFactory();
+
     Function<Integer, Integer> plus11 = (i) -> i + 11;
     RunSomething runSomething11 = (num) -> { return num + 11; };
     System.out.println(plus11.apply(1));
@@ -136,6 +138,24 @@ public class Java8to14Application {
     return () -> {
       System.out.println(msg + " Executor Thread:: " + Thread.currentThread().getName());
     };
+  }
+
+  private static void collectionFactory(){
+
+    //CASE_01 BEFORE
+    List<String> friends = new ArrayList<>();
+    friends.add("Name1");
+    friends.add("Name2");
+    friends.add("Name3");
+
+    //CASE_01 AFTER-1
+    List<String> friends2 = Arrays.asList("Name1", "Name2", "Name3");
+    //friends2.add("Name4"); //UnsupportedOperationException 내부적으로 고정된 크기의 변환할 수 있는 배열로 구현되어 추가 삭제 불
+
+    //CASE_01 AFTER-1
+    List<String> friends3 = List.of("Name1", "Name2", "Name3");
+
+
   }
 
 
