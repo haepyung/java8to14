@@ -154,8 +154,6 @@ public class Java8to14Application {
 
     //CASE_01 AFTER-1
     List<String> friends3 = List.of("Name1", "Name2", "Name3");
-
-
   }
 
 
